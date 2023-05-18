@@ -1,3 +1,4 @@
+import { FlatList } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 
 export const Container = styled.View`
@@ -22,7 +23,12 @@ export const HeaderContent = styled.View`
 export const TotalCars = styled.Text`
   font-family: ${({ theme }) => theme.fonts.inter_regular};
   color: ${({ theme }) => theme.colors.text};
-  //text-align: right;
-  //padding-right: 20px;
-  //margin-top: 60px;
 `;
+
+export const CarList = styled(FlatList).attrs({
+  // attrs: adiciona propriedades
+  contentContainerStyle: {
+    padding: 24,
+  },
+  showVerticalScrollIndicator: false
+})``;
