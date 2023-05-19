@@ -1,4 +1,7 @@
 import React from "react";
+import * as SplashScreen from "expo-splash-screen";
+import AppLoading from "expo-app-loading";
+
 import {
   useFonts,
   Inter_400Regular,
@@ -9,13 +12,10 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
-import * as SplashScreen from "expo-splash-screen";
-import { Home } from "./src/screens/Home";
-import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/styles/theme";
-import { CarDetails } from "./src/screens/CarDetails";
-import { Schedule } from "./src/screens/Schedule";
+
+import { Routes } from "./src/routes";
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -34,7 +34,7 @@ export default function App() {
   SplashScreen.hideAsync();
   return (
     <ThemeProvider theme={theme}>
-      <Schedule />
+      <Routes />
       <></>
     </ThemeProvider>
   );

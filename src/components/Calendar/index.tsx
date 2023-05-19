@@ -53,6 +53,7 @@ LocaleConfig.defaultLocale = "pt-br";
 
 export function Calendar() {
   const theme = useTheme();
+  const minDate = new Date().toISOString().split("T")[0];
   return (
     <CustomCalendar
       renderArrow={(direction) => (
@@ -81,7 +82,7 @@ export function Calendar() {
         },
       }}
       firstDay={1} //coloca o primeiro dia no calendario de segunda feira
-      minDate={new Date()}
+      minDate={minDate}
     />
   );
 }

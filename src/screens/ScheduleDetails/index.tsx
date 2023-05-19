@@ -13,10 +13,21 @@ import {
   Rent,
   Period,
   Price,
-  About,
   Accessories,
   Footer,
+  RentalPeriod,
+  CalendarIcon,
+  DateInfo,
+  DateTitle,
+  DateValue,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceQuota,
+  RentalPriceTotal,
 } from "./styles";
+import { Feather } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
 
 import SpeedSvg from "../../assets/speed.svg";
 import AccelerationSvg from "../../assets/acceleration.svg";
@@ -29,16 +40,18 @@ import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
 import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
+import { RFValue } from "react-native-responsive-fontsize";
 
-export function CarDetails() {
+export function ScheduleDetails() {
+  const theme = useTheme();
   const navigation = useNavigation();
 
-  function handleSchedule() {
-    navigation.navigate("Schedule");
+  function handleScheduleComplete() {
+    navigation.navigate("ScheduleComplete");
   }
 
   function handleReturn() {
-    navigation.navigate("Home");
+    navigation.navigate("Schedule");
   }
 
   return (
@@ -70,14 +83,42 @@ export function CarDetails() {
           <Accessory name="Auto" icon={Exchangevg} />
           <Accessory name="2 pessoas" icon={PeopleSvg} />
         </Accessories>
-        <About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla. É um belíssimo carro
-          para quem gosta de acelerar.
-        </About>
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </CalendarIcon>
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>19/05/2023</DateValue>
+          </DateInfo>
+          <Feather
+            name="chevron-right"
+            size={RFValue(24)}
+            color={theme.colors.shape}
+          />
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>19/05/2023</DateValue>
+          </DateInfo>
+        </RentalPeriod>
+        <RentalPrice>
+          <RentalPriceLabel>TOTAL</RentalPriceLabel>
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
       </Content>
       <Footer>
-        <Button title="Escolher período do aluguel" onPress={handleSchedule} />
+        <Button
+          title="Alugar agora"
+          color={theme.colors.success}
+          onPress={handleScheduleComplete}
+        />
       </Footer>
     </Container>
   );
