@@ -1,5 +1,6 @@
 import { FlatList } from "react-native";
-import styled, { DefaultTheme } from "styled-components/native";
+import styled from "styled-components/native";
+import { CarDTO } from "../../dtos/CarDTO";
 
 export const Container = styled.View`
   flex: 1;
@@ -30,5 +31,5 @@ export const CarList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 24,
   },
-  showVerticalScrollIndicator: false
-})``;
+  showVerticalScrollIndicator: false,
+})`` as React.ComponentType as new <DataListProps>() => FlatList<DataListProps>;

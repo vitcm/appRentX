@@ -10,7 +10,7 @@ import { ConfirmButton } from "../../components/ConfirmButton";
 
 export function ScheduleComplete() {
   const { width } = useWindowDimensions();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   function handleHome() {
     navigation.navigate("Home");

@@ -44,20 +44,20 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 export function ScheduleDetails() {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   function handleScheduleComplete() {
     navigation.navigate("ScheduleComplete");
   }
 
   function handleReturn() {
-    navigation.navigate("Schedule");
+    navigation.goBack();
   }
 
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => handleReturn()} />
+        <BackButton onPress={handleReturn} />
       </Header>
       <CarImages>
         <ImageSlider

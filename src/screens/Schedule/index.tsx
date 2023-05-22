@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
@@ -19,18 +19,43 @@ import { BackButton } from "../../components/BackButton";
 import theme from "../../styles/theme";
 import { StatusBar } from "react-native";
 import { Button } from "../../components/Button";
-import { Calendar } from "../../components/Calendar";
+import {
+  Calendar,
+  DayProps,
+  generateInterval,
+  MarkedDateProps,
+} from "../../components/Calendar";
 
 export function Schedule() {
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
+    {} as DayProps
+  );
+  const [markedDates, setMarkedDates] = useState<MarkedDateProps>(
+    {} as MarkedDateProps
+  );
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   function handleScheduleDetails() {
     navigation.navigate("ScheduleDetails");
   }
 
   function handleReturn() {
-    navigation.navigate("CarDetails");
+    navigation.goBack();
+  }
+
+  function handleChangeDate(date: DayProps) {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+
+    setLastSelectedDate(end);
+    const interval = generateInterval(start, end);
+    setMarkedDates(interval);
   }
 
   return (
@@ -41,7 +66,7 @@ export function Schedule() {
           translucent
           backgroundColor="transparent"
         />
-        <BackButton onPress={() => handleReturn()} color={theme.colors.shape} />
+        <BackButton onPress={handleReturn} color={theme.colors.shape} />
         <Title>
           Escolha uma{"\n"}data de início e{"\n"}fim do aluguel
         </Title>
@@ -60,11 +85,11 @@ export function Schedule() {
         </RentalPeriod>
       </Header>
       <Content>
-        <Calendar />
+        <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
 
       <Footer>
-        <Button title="Confirmar" onPress={handleScheduleDetails}/>
+        <Button title="Confirmar" onPress={handleScheduleDetails} />
       </Footer>
     </Container>
   );
