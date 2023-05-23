@@ -33,3 +33,15 @@ export const CarList = styled(FlatList).attrs({
   },
   showVerticalScrollIndicator: false,
 })`` as React.ComponentType as new <DataListProps>() => FlatList<DataListProps>;
+
+export const MyCarsButton = styled.TouchableOpacity`
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.main};
+  border-radius: 30px;
+  position: absolute;
+  bottom: 22px;
+  right: 22px;
+`;
