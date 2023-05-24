@@ -31,7 +31,7 @@ export function Home() {
   }
 
   function handleOpenMyCars() {
-    navigation.navigate('MyCars');
+    navigation.navigate("MyCars");
   }
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export function Home() {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total: 12 carros</TotalCars>
+          <TotalCars>Total: {cars.length} carros</TotalCars>
         </HeaderContent>
       </Header>
       {loading ? (
