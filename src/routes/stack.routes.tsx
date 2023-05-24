@@ -7,12 +7,18 @@ import { Schedule } from "../screens/Schedule";
 import { ScheduleDetails } from "../screens/ScheduleDetails";
 import { ScheduleComplete } from "../screens/ScheduleComplete";
 import { MyCars } from "../screens/MyCars";
+import { Splash } from "../screens/Splash";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export function StackRoutes() {
   return (
-    <Navigator>
+    <Navigator initialRouteName="Splash">
+      <Screen
+        name="Splash"
+        component={Splash}
+        options={{ headerShown: false }}
+      />
       <Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Screen
         name="CarDetails"
