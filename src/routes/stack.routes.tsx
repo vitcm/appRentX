@@ -23,7 +23,7 @@ export function StackRoutes() {
       <Screen
         name="CarDetails"
         component={CarDetails}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Screen
         name="Schedule"
