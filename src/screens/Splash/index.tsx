@@ -9,12 +9,16 @@ import Animated, {
   withTiming,
   Easing,
   interpolate,
+  Extrapolate,
+  runOnJS,
 } from "react-native-reanimated";
 
 import { Container } from "./style";
+import { useNavigation } from "@react-navigation/native";
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
+  const navigation = useNavigation<any>();
   const brandStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(splashAnimation.value, [0, 25, 50], [1, 0.3, 0]),
@@ -22,12 +26,24 @@ export function Splash() {
   });
   const logoStyle = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(splashAnimation.value, [0, 25, 50], [0, 0.3, 1]),
+      opacity: interpolate(
+        splashAnimation.value,
+        [0, 25, 50],
+        [0, 0.3, 1],
+        Extrapolate.CLAMP
+      ),
     };
   });
 
+  function startApp() {
+    navigation.navigate("Home");
+  }
+
   useEffect(() => {
-    splashAnimation.value = withTiming(50, { duration: 5000 });
+    splashAnimation.value = withTiming(50, { duration: 5000 }, () => {
+      "worklet";
+      runOnJS(startApp)();
+    });
   }, []);
 
   return (
